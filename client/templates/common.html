@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+
+    <!-- normal css -->
+    <link rel="stylesheet" href="{% static 'css/admin_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="{% static 'client/css/swiper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'client/css/swiper.css' %}">
+    <link rel="stylesheet" href="{% static 'client/css/styles.css' %}">
+    
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="{% static 'css/boostrap.min.css' %}">
+     <script src="{% static 'js/sweatalert.js' %}"></script>
+ 
+</head>
+
+<body>
+    
+    <div class="super_container wrapper">
+        <!-- header section -->
+        <header class="headerOne">
+            <!-- mini nav -->
+            <div class="custom-bg container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="container-fluid">
+                            <div class="user-menu">
+                                <ul>
+                                    {% if user.is_authenticated %}
+                                    <li style="color:white;">Welcome, {{user.first_name|upper}} </li>
+                                    <li><a href="{% url 'profile' %}" class="text-light"><i class="fa fa-user text-light"></i> MyProfile </a></li>
+                                    <li><a href="" class="text-light"><i class="fa fa-dashboard text-light"></i> Dashboard </a></li>
+                                    <li><a href="" class="text-light"><i class="fa fa-upload text-light"></i> Upload</a></li>
+                                    <li><a href="{% url 'logout' %}" class="text-light"><i class="fa fa-sign-out "></i> Sign Out</a></li>
+                                    {% else %}
+                                    <li><a href="" class="text-light"><i class="fa fa-user text-light"></i> My Profile </a></li>
+                                    <li><a href="" class="text-light"><i class="fa fa-heart text-light"></i> CRUD_MUSIC </a></li>
+                                    <li><a href="{% url 'register' %}" class="text-light"><i class="fa fa-user text-light"></i> Sign Up </a></li>
+                                    <li><a href="{% url 'login' %}" class="text-light"><i class="fa fa-user "></i> Sign In </a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- For Message  -->
+            <div class="container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}"> {{message}} </div>
+                    {% endfor %} 
+                {% endif %}
+            </div>
+
+            <figure class="logo">
+                <a href="{% url 'usermanagement-home' %}"><img src="{% static 'img/Logo0.png' %}" alt="Logo"></figure>
+            </a>
+            <nav class="menu">
+                <ul>
+                    <li><a href="{% url 'usermanagement-home' %}">Home</a></li>
+                    <li> <a href="">Genres </a>
+                        <ul>
+                            <li> <a href="{% url 'music_category' 'melody' %}">Melody</a> </li>
+                            <li><a href="{% url 'music_category' 'pop' %}">Pop</a></li>
+                            <li><a href="{% url 'music_category' 'rock' %}">Rock</li>
+                            <li><a href="{% url 'music_category' 'rock' %}">Romance</a></li>
+                            <li><a href="{% url 'music_category' 'rap' %}">Rap</a></li>
+                            <li><a href="{% url 'music_category' 'hip-hop' %}">Hip-Hop</a></li>
+                            <li><a href="{% url 'music_category' 'jazz and blues' %}">Jazz & blues</a></li>
+                            <li><a href="{% url 'music_category' 'folk' %}">Folk</a></li>
+                            <li><a href="{% url 'music_category' 'mental' %}">Mental</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">Year</a>
+                        <ul>
+                            <li><a href="{% url 'music_year' year=2020 %}">2020</a></li>
+                            <li><a href="{% url 'music_year' year=2019 %}">2019</a></li>
+                            <li><a href="{% url 'music_year' year=2018 %}">2018</a></li>
+                            <li><a href="{% url 'music_year' year=2017 %}">2017</a></li>
+                            <li><a href="{% url 'music_year' year=2016 %}">2016</a></li>
+                            <li><a href="{% url 'music_year' year=2015 %}">2015</a></li>
+                            <li><a href="{% url 'music_year' year=2014 %}">2014</a></li>
+                        </ul>
+                    </li>
+                    <li ><a  href="">Language</a>
+                        <ul>
+                            <li><a href="{% url 'music_language' 'english' %}">English</a></li>
+                            <li> <a href="{% url 'music_language' 'nepali' %}">Nepali</a> </li>
+                            <li> <a href="{% url 'music_language' 'hindi' %}">Hindi</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Most Watched</a></li>
+                    <li class="mobsearch" method = "GET">
+                        <form class="mobform">
+                            <input type="text" name="q" value="{{request.GET.q}}" class="mobsearchfield" placeholder="Search...">
+                            <input type="submit" value="" class="mobsearchsubmit">
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+            <form class="search" method = "GET" action="{% url 'music_search' %}">
+                <input type="text" name="query" value="{{request.GET.q}}" class="searchfield" placeholder="Search...">
+                <input type="submit" value="" class="searchsubmit">
+            </form>
+            <div class="toggle"><img src="img/menu.svg"></div>
+        </header>
+
+        <br><br><br> <br>
+        <!-- <div class="homeslider">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="{% static 'client/images/slider/LadyGaga.png' %}">
+                        <div class="caption">
+                            <div class="captioninside">
+                                <h3> Song Title1 </h3>
+                                <p> Lorem ipsum dolor siamet </p>
+                                <a href="#" class="playbutton">Play</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{% static 'client/images/slider/Queen-1.png ' %}">
+                        <div class="caption">
+                            <div class="captioninside">
+                                <h3>Song Title 2</h3>
+                                <p>Lorem ipsum dolor siamet</p>
+                                <a href="single.html" class="playbutton">Play</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{% static 'client/images/slider/ConerMaynard.png' %}">
+                        <div class="caption">
+                            <div class="captioninside">
+                                <h3>Song Title 3</h3>
+                                <p>Lorem ipsum dolor siamet</p>
+                                <a href="single.html" class="playbutton">Play</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-pagination"></div>
+            </div>
+        </div> -->
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+                <li data-target="#demo" data-slide-to="3"></li>
+            </ul>
+        
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'client/images/slider/Group.png' %}" class='slider-image-height-width' alt="Music">
+                    <div class="container nepal">
+                        <div class="carousel-caption">
+                                    <h3>Song Title 3</h3>
+                                    <p>Lorem ipsum dolor siamet</p>
+                                    <a href="single.html" class="playbutton">Play</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="carousel-item">
+                    <img src="{% static 'client/images/slider/JustiinBiber.png' %}" class='slider-image-height-width' alt="Music">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            
+                                    <h3>Song Title 3</h3>
+                                    <p>Lorem ipsum dolor siamet</p>
+                                    <a href="single.html" class="playbutton">Play</a>
+                             
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'client/images/slider/Queen-1.png ' %}" class='slider-image-height-width' alt="Music">
+                    <div class="container">
+                        <div class="carousel-caption">
+                          
+                                    <h3>Song Title 3</h3>
+                                    <p>Lorem ipsum dolor siamet</p>
+                                    <a href="single.html" class="playbutton">Play</a>
+                              
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'client/images/slider/joker-banner.png ' %}" class='slider-image-height-width' alt="Music">
+                    <div class="container nepal">
+                        <div class="carousel-caption">
+                
+                                    <h3>Song Title 3</h3>
+                                    <p>Lorem ipsum dolor siamet</p>
+                                    <a href="single.html" class="playbutton">Play</a>
+                             
+                        </div>
+                    </div>
+                </div>    
+        
+            </div>
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+        
+
+        {% block content %} {% endblock %}
+
+
+        <!-- footer section -->
+        <footer class="footer py-3">
+                {% include "./footer.html" %}        
+        </footer>
+
+    </div>
+
+    <!-- normal js -->
+    <script src="{% static 'js/jquery.min.js ' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js ' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js ' %}"></script>
+
+    <!-- Swiper JS -->
+    <script src="{% static 'client/js/swiper.min.js ' %}"></script>
+    <script src="{% static 'client/js/slider.js ' %}"></script>
+
+    <script src="{% static 'client/js/jquery-3.1.1.min.js ' %}"></script>
+    <script src="{% static 'client/js/script.js ' %}"></script>
+
+
+
+    <script src="{% static 'js/slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.mim.js' %}"></script>
+    <script src="{% static 'js/boostrap.min.js' %}"></script>
+
+</body>
+
+</html>

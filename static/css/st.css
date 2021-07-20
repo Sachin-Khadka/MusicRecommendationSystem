@@ -1,0 +1,131 @@
+/*services*/
+
+#services
+{
+	background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(../images/im.PNG);
+	background-size: cover;
+	background-position: center;
+	color: #efefef !important;
+	background-attachment: fixed;
+	padding-top: 60 px;
+	padding-bottom: 60 px;
+}
+
+
+#services h1
+{
+	text-align: center;
+	color : #efefef ! important;
+	padding-bottom: 10px;
+	padding-top:15px;
+}
+
+
+#services h1::after
+{
+	content: '';
+	background: #efefef;
+	display: block;
+	height: 3px;
+	width: 170px;
+	margin : 10px auto 5px;
+
+}
+
+#sac h1
+{
+	text-align: center;
+	color : #efefef ! important;
+	padding-bottom: 10px;
+	padding-top:15px;
+}
+
+#sac h1::after{
+	content: '';
+	background: #efefef;
+	display: block;
+	height: 3px;
+	width: 170px;
+	margin : 10px auto 5px;
+}
+
+
+.services
+{
+	margin-top: 30px;
+}
+
+.icon
+{
+	font-size: 40px;
+	margin: 20px auto;
+	padding: 20px;
+	height: 80px;
+	width: 80px;
+	border:1px solid #fff;
+	border-radius: 50%;
+
+}
+
+#services p
+{
+	font-size: 14px;
+	margin-top: 20px;
+	color:#ccc;
+}
+
+.services .col-md-3:hover 
+{
+	background: #007bff;
+	cursor: pointer;
+	transition: 0.07s;
+}
+
+
+
+/*price plan*/
+#priceplan
+{
+	padding-top: 50px;
+	padding-bottom: 50px;
+	color: #555;
+}
+
+h1
+{
+	text-align: center;
+	color: #555 !important;
+	padding-bottom: 10px;
+
+}
+
+h1::after
+{
+
+	content: '';
+	background: #007bff;
+	display: block;
+	height: 3px;
+	width: 155px;
+	margin : 10px auto 5px;
+
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+

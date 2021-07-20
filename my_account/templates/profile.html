@@ -1,0 +1,64 @@
+{% extends 'base.html'%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<style type="text/css"> 
+
+    .content-section {
+        background: #ffffff;;
+        padding: 10px 20px;
+       /* <!-- border: 1px solid #dddddd; -->*/
+        border-radius: 3px;
+        margin-bottom: 20px;
+        padding: 20px;
+        /* width: fit-content;*/
+        text-align: center;
+      }
+      .account-img {
+        height: 125px;
+        width: 125px;
+        margin-right: 20px;
+        margin-bottom: 16px;
+      }
+      
+      .account-heading {
+        font-size: 2.5rem;
+      }   
+
+
+      .forBorder{
+        border: 2px ridge palevioletred;
+        background: rgb(250, 250, 250);
+      }
+</style>
+ <br> <br> <br> <br> <br> <br> <br>
+{% if user.is_authenticated  %}
+<div class="container mt-3 mb-2 forBorder">
+
+  <div class="container">
+    <div class="content-section">
+      <img class ='rounded-circle account-img' src='{{ user.profile.image.url }}'>
+      <div class="media-body">
+          <h2 class='account-heading'>{{ user.username }}</h2>   
+          <p class="text-secondary">{{ user.email }}</p>    
+      </div>
+  </div>
+  
+    <form method="POST" enctype="multipart/form-data"> 
+      {% csrf_token %}
+      <fieldset class = 'form-group'>
+          <legend class='border-bottom mb-4'> <h3> Update Profile  </h3></legend>
+          {{ UserForm|crispy }}
+          {{ ProfileForm|crispy }}
+      <div class='form-group'> 
+          <button class="btn btn-info btn-block col-md-2 text-center" type="submit">Update</button>
+      </div>
+     </form>
+  </div>
+</div>
+   
+{%endif%}
+
+
+
+{% endblock %}

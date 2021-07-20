@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Music</title>
+
+    <!-- normal css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+
+</head>
+<body>
+
+<h2 style="text-align: center; padding-top: 2%; color: rgb(218, 16, 16);">Upload Your Music</h2>
+
+<div class="container my-3">
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="required" for="exampleInputEmail1"> Musc Title </label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="title" placeholder="Music Title">
+        </div>
+        
+
+        <div class="form-group">
+            <label class="required" for="exampleInputEmail1"> Singer </label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="singer" placeholder="Singer">
+        </div>
+
+        <div class="form-group">
+            <label class="required" for="exampleInputEmail1"> Band </label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="band" placeholder="Band">
+        </div>
+
+        <div class="form-group">
+            <label class="required" for="exampleInputEmail1"> Tags </label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tag" placeholder="Tags">
+        </div>
+
+        <div class="form-group">
+            <label class="required" for="exampleInputEmail1"> Year of Production </label>
+            <input type="text" size="16" type="text" class="form_datetime" class="form-control"   name="year_production" placeholder="YYYY-MM-DD">
+        </div>
+        <script type="text/javascript">
+            $(".form_datetime").datetimepicker({
+                format: "YYYY-MM-DD - hh:ii"
+            });
+        </script>  
+
+        <div class="form-group">
+            <label class="required" for="exampleFormControlFile1">Upload Music</label>
+            <input type="file" class="form-control-file" name="file">
+        </div> 
+
+        <div class="form-group">
+            <label class="required" for="id_image">Upload Image</label> <br>
+            <input type="file" name="picture" accept="image/*" required="" id="id_image"> 
+        </div> 
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea >
+        </div>   
+    <div style="padding-top: 3%; padding-bottom: 3%;">
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </div>
+      </form>
+    </div>
+</body>
+</html>

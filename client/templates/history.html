@@ -1,0 +1,32 @@
+{% extends 'common.html' %}
+{% block content %}	
+{% load static  %}
+<h1 style="color: rgb(241, 228, 228); text-align: center; padding-top:20px;">Welcome to Your History!!</h1>
+{% if music|length < 1 %}
+        <h3 style="text-align: center; color: rgb(241, 228, 228);padding-top: 5%;">You have no Music in History.</h3>
+{% endif %}
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' >
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+	
+<main class="content">
+	<div class="single">
+		<section class="movie">
+            {% for object in history reversed  %}
+			<img src="{{i.image.url}}"> 
+			<ul>
+				<li>{{object}}</li>
+				<li>{{object.description}}</li>
+				<li><b>Singer:</b> {{object.singer}}</li>
+				<li><b>Band:</b> {{object.band}}</li>
+				<li> <b>Category: </b>{{object.category  }}<li>
+				<li><a href="">{{ object.cast }}</a></li>
+				<li> {{object.views_count}} Views</li>
+				<li>
+              		<a href="{% url 'music_detail' music.slug %}"><button class="btn btn-outline-danger">Listen Music</button></a>
+				</li>
+			</ul>
+           {% endfor %} 
+		</section>
+	</div>
+</main>
+{% endblock content %}

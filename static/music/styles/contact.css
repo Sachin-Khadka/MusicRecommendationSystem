@@ -1,0 +1,107 @@
+@charset "utf-8";
+
+/*********************************
+6. Contact
+*********************************/
+
+.contact {
+    background: #585858;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.contact_content {
+    margin-top: -4px;
+}
+
+.contact_title {
+    font-size: 60px;
+    font-weight: 400;
+    color: #e0e7ee;
+    line-height: 1.2;
+    margin-left: -3px;
+}
+
+.contact_text {
+    margin-top: 24px;
+}
+.contact_text p {
+    color: #e0e7ee;
+}
+.contact_list {
+    margin-top: 50px;
+}
+
+.contact_list ul li {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #f7f4f4;
+}
+
+.contact_list ul li:not(:last-of-type) {
+    margin-bottom: 29px;
+}
+
+.contact_list ul li span {
+    color: #2ac275;
+}
+
+.contact_form_container {}
+
+.contact_form>div:not(:last-of-type) {
+    margin-bottom: 17px;
+}
+
+.contact_input {
+    width: 100%;
+    height: 56px;
+    background: transparent;
+    border: solid 2px #e0e7ee;
+    border-radius: 22px;
+    padding-left: 34px;
+    font-size: 16px;
+    font-weight: 600;
+    color:  #e0e7ee;
+    outline: none;
+}
+
+.contact_input::-webkit-input-placeholder {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color:#e0e7ee !important;
+}
+
+.contact_input:-moz-placeholder {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color: #e0e7ee !important;
+}
+
+.contact_input::-moz-placeholder {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color:#e0e7ee !important;
+}
+
+.contact_input:-ms-input-placeholder {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color: #e0e7ee !important;
+}
+
+.contact_input::input-placeholder {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color:#e0e7ee !important;
+}
+
+.contact_textarea {
+    height: 119px;
+    padding-top: 18px;
+}
+
+.contact_form_button {
+    margin-top: 8px;
+    outline: none;
+}

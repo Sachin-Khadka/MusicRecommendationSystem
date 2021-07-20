@@ -1,0 +1,157 @@
+{% extends 'base.html'%} {% block content %} {% load crispy_forms_tags %}
+<br> <br> <br> <br> <br>
+
+<style type="text/css">
+    .login-form {
+        width: 385px;
+        margin: 30px auto;
+    }
+    
+    .login-form form {
+        margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    
+    .login-form h2 {
+        margin: 0 0 15px;
+        font-weight: normal;
+    }
+    
+    .login-form h2 {
+        color: #636363;
+        margin: 0 0 15px;
+        position: relative;
+        text-align: center;
+    }
+    
+    .login-form h2:before,
+    .login-form h2:after {
+        content: "";
+        height: 2px;
+        width: 30%;
+        background: #d4d4d4;
+        position: absolute;
+        top: 50%;
+        z-index: 2;
+    }
+    
+    .login-form h2:before {
+        left: 0;
+    }
+    
+    .login-form h2:after {
+        right: 0;
+    }
+    
+    .form-control,
+    .login-btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    
+    .input-group-addon .fa {
+        font-size: 18px;
+    }
+    
+    .login-btn {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .social-btn .btn {
+        border: none;
+        margin: 10px 3px 0;
+        opacity: 1;
+    }
+    
+    .social-btn .btn:hover {
+        opacity: 0.9;
+    }
+    
+    .social-btn .btn-primary {
+        background: #507cc0;
+    }
+    
+    .social-btn .btn-info {
+        background: #64ccf1;
+    }
+    
+    .social-btn .btn-danger {
+        background: #df4930;
+    }
+    
+    .or-seperator {
+        margin-top: 20px;
+        text-align: center;
+        border-top: 1px solid #ccc;
+    }
+    
+    .or-seperator i {
+        padding: 0 10px;
+        background: #f7f7f7;
+        position: relative;
+        top: -11px;
+        z-index: 1;
+    }
+    #color a{
+        color : #5cb85c !important
+    }
+
+</style>
+
+<div class="login-form">
+
+    <!-- {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li  style="color: red;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} {% endif %}
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+  {% endif %} -->
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <!-- <h4 class="text-center dark"> Sign in to your account </h4>     -->
+        <h2> Login </h2>
+        <p class="hint-text">Login in to your account. It only takes a minute.</p>
+        <br> {{ form|crispy }}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary login-btn btn-block">Login Now</button>
+        </div>
+        <div class="or-seperator"><i>or</i></div>
+        <p class="text-center">Login with your social media account</p>
+        <div class="text-center social-btn">
+            <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+            <a href="#" class="btn btn-info"><i class="fa fa-twitter"></i>&nbsp; Twitter</a>
+            <a href="#" class="btn btn-danger"><i class="fa fa-google"></i>&nbsp; Google</a>
+        </div>
+        <br>
+        <div>
+            <p class="text-center text-muted small" id = "color"> If forget password? <a href="{% url 'register' %}"> Click here! </a></p>
+        </div>
+
+    </form>
+    <div>
+        <p class="text-center text-muted small" id = "color"> Don't have an account? <a href="{% url 'register' %}"> Register here! </a></p>
+    </div>
+
+</div>
+
+
+
+<!-- Query All input fields for placeholder -->
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[2].placeholder = 'User Name ';
+    form_fields[3].placeholder = 'Password';
+    for (var field in form_fields) {
+        form_fields[field].className += ' form-control'
+    }
+</script>
+
+{% endblock %}

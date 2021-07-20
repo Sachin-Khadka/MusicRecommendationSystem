@@ -1,0 +1,56 @@
+{% extends 'common.html' %}
+{% block content %}	
+{% load static  %}
+
+
+
+{% if music|length < 1 %}
+        <h3 style="text-align: center; padding-top: 5%; color: rgb(248, 248, 250); text-align: center;">You have no Music in your Listen Later</h3>
+{% endif %}
+
+	
+
+<main class="content">
+	<h1 class="centered" style="color: rgb(248, 248, 250); text-align: center;">Listen Later</h1>
+	<section class="centered">
+		<div class="movies">
+			{% for music in music reversed %}
+			<div class="mov">
+				<a href="{% url 'music_detail' music.slug %}">
+					<img class = "image" src="{{ music.image.url }}">
+					<h2 class="movietitle">{{ music.title }}</h2>
+				</a>
+			</div>
+			{% empty %}
+			{% endfor %}
+		</div>
+		{% if is_paginated %}
+		<nav class="pagination">
+			<ul>
+				{% if page_obj.has_previous %}
+				<li><a href="?page={{ page_obj_previous_page_number }}">Prev</a></li>
+				{% else %}
+				<li class="disabled"> </li>
+				{% endif %}
+				
+				{% for pages in page_obj.paginator.page_range %}
+					{% if page_obj.number == pages %}
+					  <li><a href="#">{{pages}}</a></li>
+					{% else %}
+					 <li><a href="?page={{pages}}">{{pages}}</a></li>
+				   {% endif %}
+				{% endfor %} 
+
+			{% if page_obj.has_next %}
+				<li><a href="?page={{ page_obj.next_page_number }}"> Next</a></li>
+			{% else %}	
+				<li class="disabled"> </li>
+			{% endif %}		
+			</ul>
+		</nav>
+		{% endif %}
+	</section>
+
+</main>
+
+{% endblock content %}

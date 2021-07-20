@@ -1,0 +1,43 @@
+{% extends 'common.html'%}
+
+{% block content %}
+{% if  music|length < 1 %}
+        <h3 style="text-align: center; color: rgb(241, 228, 228);padding-top: 5%;">You Have have not uploaded any Music in this Channel.</h3>
+{% endif %}
+
+<h2 style="text-align: center; padding-top: 2%; color: rgb(241, 232, 232);">Channel: {{channel.name}}</h2>
+
+<div class="container">
+{% for object in music reversed %}
+
+<section class="movie">
+  <img src="{{object.image.url}}"> 
+  <ul>
+    <li>{{object}}</li>
+    <li>{{object.description}}</li>
+    <li><b>Singer:</b> {{object.singer}}</li>
+    <li><b>Band:</b> {{object.band}}</li>
+    <li><a href="">{{ object.cast }}</a></li>
+      <li>
+        <audio controls style="padding-top: 2%;">
+          <source src="/media/{{object.music}}" type="audio/mp3">
+        </audio>
+
+        <div style="padding-top: 3%;">
+          <div class="row" style="padding-left: 4%;">
+          <form action=""  method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="music_id" value="{{object.music_id}}">
+          <button type="submit" class="btn btn-outline-danger" id="submit_btn">Listen Later</button>
+          </form>
+          <a download href="/media/{{object.music}}" style="padding-left: 1%;"><button class="btn btn-outline-danger">Download Music</button></a>
+            </div>
+        </div>	
+      </li>
+      
+  </ul>  
+</section>
+{% endfor %}
+</div>
+{% endblock %}
+h1>

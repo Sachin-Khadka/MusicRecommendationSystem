@@ -1,0 +1,149 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<br> <br> <br> <br> <br> <br>
+
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+        <li data-target="#demo" data-slide-to="3"></li>
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'img/slider-music-2.PNG' %}" class='slider-image-height-width' alt="Music">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/slider-music-3.PNG' %}" class='slider-image-height-width' alt="Music">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/slider-music-6.PNG' %}" class='slider-image-height-width' alt="Music">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/slider-music-4.PNG' %}" class='slider-image-height-width' alt="Music">
+        </div>
+
+    </div>
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
+
+<section class="message py-5">
+    <div id = 'sac' class="container-fluid text-center">
+        <h1>About Us</h1>
+        <h5 class='text-center'>
+            This is user management and music recommendation system. We recommend the music according to the user's preferences. We also manage our users effectively and securely. We have three types of users(Guest, Client, and Admin). Each user have their own permission
+            to access their page according to their type.
+        </h5>
+        </div>
+        {% include "client_guest_cards.html" %}        
+</section>
+
+
+<!-- End of Message Section -->
+
+<!-- Start Services Section  -->
+<section id = "services">
+	<div class = "container">
+		<h1>Our Services</h1>
+   <div class="row services">
+ 	 <div class="col-md-3 text-center">
+ 		<div class="icon">
+ 		   <i class="fa fa-random"></i>
+ 		   	</div>
+ 		     <h3>Recommendation</h3>
+ 		     <p>This Website lets you discover new music, find related artists, and listen to top, trending and new songs. This music is suggested accoring to individual's preferences. </p>
+ 	    </div>
+
+ 	 <div class="col-md-3 text-center">
+ 		<div class="icon">
+ 		   <i class="fa fa-users"></i>
+ 		</div>
+ 		     <h3>User Management</h3>
+ 		     <p>The User Management System provides functionality to manage users and personal profiles. It is reliable, extensible and open for easier integration with existent systems. </p>
+ 	   </div>
+
+ 	 <div class="col-md-3 text-center">
+ 		<div class="icon">
+ 		   <i class="fa fa-list"></i>
+ 		</div>
+ 		     <h3>Create Playlist</h3>
+ 		     <p>You can add, reorder, and remove songs, albums, and playlists through this Music app. You can add many songs to a playlist. </p>
+ 	    </div>
+
+<div class="col-md-3 text-center">
+ 		<div class="icon">
+ 		   <i class="fa fa-music"></i>
+ 		   	</div>
+ 		     <h3>Provide Music</h3>
+ 		     <p>This Music app contain Nepali and International songs on the same platform. This app allows user to dowload the music. </p>
+ 	    </div>
+
+ 	</div>
+
+   </div>
+
+</div>
+
+</section>
+
+<!-- End of services Section -->
+
+
+<!-- Contact -->
+
+<div id ="sac" class="contact">
+    <h1> Get in Touch </h1>
+    <div class="container">
+        <div class="row">
+            <!-- Contact Content -->
+            <div class="col-lg-5">
+                <div class="contact_content">
+                    <!-- <div class="contact_title">Get in touch</div> -->
+                    <div class="contact_text">
+                        <p> Keep in touch with us and then we will able to recommends you your favouite songs and keep your infomation secure. </p>
+                    </div>
+                    <div class="contact_list">
+                        <ul>
+                            <li><span>Address:</span> Kathmandu, Nepal, NP</li>
+                            <li><span>Phone:</span> +977 9840439915 </li>
+                            <li><span>E-mail</span> music@contact.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-6 offset-lg-1 contact_col" id ="keepin">
+                <div class="contact_form_container">
+                    <form method ="POST" class="contact_form" id="contact_form">
+                    {% csrf_token %}
+                        <div>
+                            <div class="row">
+                                <div class="col-md-6 contact_input_col"><input type="text" class="contact_input" name ="name" placeholder="Your Name" required="required"></div>
+                                <div class="col-md-6"><input type="email" name = "email" class="contact_input" placeholder="Your E-mail" required="required"></div>
+                            </div>
+                        </div>
+                        <div><input type="text" class="contact_input" name="subject" placeholder="Subject" required="required"></div>
+                        <div><textarea class="contact_input contact_textarea" name ="message" placeholder="Message" required="required"></textarea>
+                        </div>
+                        <button class="button contact_form_button"><span>send</span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

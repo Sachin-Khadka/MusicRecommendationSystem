@@ -1,0 +1,287 @@
+{% extends 'common.html' %}
+{% load static %}
+{% if message %}
+<script>
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: '{{message}}',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    </script>
+{% endif %}
+
+ <!-- For Sweet Alert -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+ <link rel="stylesheet" href="{% static 'css/sweetalert.css' %}">
+ <!-- END For Sweet Alert -->
+{% block content %}	
+
+<style>
+	@charset "utf-8";
+
+	/*********************************
+	Review 
+	*********************************/
+
+	.contact_title {
+		font-size: 60px;
+		font-weight: 400;
+		color: #e0e7ee;
+		line-height: 1.2;
+		margin-left: -3px;
+	}
+	
+	.contact_text {
+		margin-top: 24px;
+	}
+	.contact_text p {
+		color: #e0e7ee;
+	}
+	.contact_list {
+		margin-top: 50px;
+	}
+	
+	.contact_list ul li {
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 1.2;
+		color: #f7f4f4;
+	}
+	
+	.contact_list ul li:not(:last-of-type) {
+		margin-bottom: 29px;
+	}
+	
+	.contact_list ul li span {
+		color: #2ac275;
+	}
+	
+	.contact_form_container {}
+	
+	.contact_form>div:not(:last-of-type) {
+		margin-bottom: 17px;
+	}
+	
+	.contact_input {
+		background: transparent;
+		border: solid 2px #e0e7ee;
+		border-radius: 22px;
+		padding-left: 34px;
+		font-size: 16px;
+		font-weight: 600;
+		color:  #e0e7ee;
+		outline: none;
+	}
+	
+	.contact_input::-webkit-input-placeholder {
+		font-size: 16px !important;
+		font-weight: 400 !important;
+		color:#e0e7ee !important;
+	}
+	
+	.contact_input:-moz-placeholder {
+		font-size: 16px !important;
+		font-weight: 400 !important;
+		color: #e0e7ee !important;
+	}
+	
+	.contact_input::-moz-placeholder {
+		font-size: 16px !important;
+		font-weight: 400 !important;
+		color:#e0e7ee !important;
+	}
+	
+	.contact_input:-ms-input-placeholder {
+		font-size: 16px !important;
+		font-weight: 400 !important;
+		color: #e0e7ee !important;
+	}
+	
+	.contact_input::input-placeholder {
+		font-size: 16px !important;
+		font-weight: 400 !important;
+		color:#e0e7ee !important;
+	}
+	
+	.contact_textarea {
+		height: 90px;
+		width: 350px;
+		padding-top: 18px;
+	}
+	
+	.contact_form_button {
+		margin-top: 8px;
+		outline: none;
+	}
+</style>
+
+
+<main class="content">
+
+		  <!-- For Message -->
+		  <div class="container">
+			{% if message %}
+				{% for i in message %}
+					<div> {{message}} </div>
+				{% endfor %} 
+			{% endif %}
+		</div>
+
+
+		{% if message %}
+			<script>
+				Swal.fire({
+					position: 'top-end',
+					icon: 'success',
+					title: '{{message}}',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				</script>
+	    {% endif %}
+
+	<div class="single">
+		<!-- This Section is for showing the details of Musics -->
+		<section class="movie">
+			<img src="{{object.image.url}}"> 
+			<ul>
+				<li>{{object}}</li>
+				<li>{{object.description}}</li>
+				<li><b>Singer:</b> {{object.singer}}</li>
+				<li><b>Band:</b> {{object.band}}</li>
+				<li> <b>Category: </b>{{object.category  }}<li>
+				<li><a href="">{{ object.cast }}</a></li>
+				<li> {{object.views_count}} Views</li>
+					<li>
+						<audio controls style="padding-top: 2%;">
+							<source src="/media/{{object.music}}" type="audio/mp3">
+						</audio>
+
+						<div style="padding-top: 3%;">
+							<div class="row" style="padding-left: 4%;">
+							<form action="/music_detail/listenlater"  method="POST">
+							{% csrf_token %}
+							<input type="hidden" name="video_id" value="{{music.music_id}}">
+							<button type="submit" class="btn btn-outline-danger" id="submit_btn">Add to Listen Later</button>
+							</form>
+							<a download href="/media/{{object.music}}" style="padding-left: 1%;"><button class="btn btn-outline-danger">Download Music</button></a>
+						    </div>
+						</div>	
+					</li>		
+			</ul>	
+		</section>
+
+		<!-- This Section is for Review and Rating  -->
+		<section class="links">
+			<h3>Rate and Review </h3>
+			<br> <br>
+			<div class="row">
+				<!-- First Column: Rating and Review -->
+				<div class="col-6">
+						<ul>
+							<li> 
+								<div class="col-sm-offset-0">
+									<form class="form-horizontal" role="search" method="post" action="{% url 'ratingreview' music.music_id %}" onsubmit="return validateForm()"  name="ratingForm">
+										<div class="form-group">
+										<div class="input-group">
+										<div class="row">
+										<div class="col-lg-12">
+										<div class="star-rating">
+											<span class="fa fa-star-o" data-rating="1"></span>
+											<span class="fa fa-star-o" data-rating="2"></span>
+											<span class="fa fa-star-o" data-rating="3"></span>
+											<span class="fa fa-star-o" data-rating="4"></span>
+											<span class="fa fa-star-o" data-rating="5"></span>
+											<input type="hidden" name="rating" class="rating-value" value="0" >
+											{% csrf_token %}
+										</div>
+										</div>
+										</div>
+										</div>
+										</div>
+
+
+										<!-- Review Form -->
+										<div class="contact_form_container">
+											<div><textarea class="contact_input contact_textarea" name ="review" placeholder="Write Your Review" required="required"></textarea></div>
+										</div>	
+											<div>
+												<input type="submit" class="btn btn-info" value="submit">
+											</div>
+									</form>
+								</div>
+							</li>
+						</ul>
+				</div>
+				<!-- Second Column: Suggestion -->
+				<div class="col-6">	
+					<h3> Suggestion </h3> <br> <br> 
+					<div class="contact_form_container">
+						<form method ="POST" action = "suggestion/" class="contact_form">
+						 {% csrf_token %}
+							<div><textarea class="contact_input contact_textarea" name ="review" placeholder="Send Your Feedback or other Queries" required="required"></textarea></div>
+							<input type="submit" class="btn btn-info" value="submit">
+						</form>
+					</div>		
+				</div>
+			</div>
+		</section>
+
+		<!-- This Section is for Related Musics   -->
+		<section class="related">
+			<h3> Related music </h3>
+			{% for music in related_musics %}
+				<div class="relatemovie">
+					<a href="{% url 'music_detail' music.slug %}"><img src="{{music.image.url}}" height="250px" width="350px"></a>
+					<a href="{% url 'music_detail' music.slug %}"><span class="relatedname"> {{music.title}}</span></a>
+				</div>
+			{% endfor %}
+		</section>	
+	</div>
+</main>
+
+
+<script type="text/javascript" src="{%static 'rating/js/jquery.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'rating/js/bootstrap.min.js'%}"></script>
+
+<script type="text/javascript">
+    var $star_rating = $('.star-rating .fa');
+
+    var SetRatingStar = function() {
+        return $star_rating.each(function() {
+        if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+            return $(this).removeClass('fa-star-o').addClass('fa-star');
+        } else {
+        return $(this).removeClass('fa-star').addClass('fa-star-o');
+        }
+        });
+        };
+
+    $star_rating.on('click', function() {
+    $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+    return SetRatingStar();
+    });
+
+    SetRatingStar();
+    $(document).ready(function() {
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    function validateForm(){
+    var x = document.forms["ratingForm"]["rating"].value;
+    if(x=="0"){
+        alert("Invalid Input");
+        return false;
+    }
+    }
+</script>
+
+
+
+
+{% endblock content %}
